@@ -2,7 +2,9 @@ package br.controllers;
 
 import br.model.JogadorEntity;
 import br.services.RankingEjbStateless;
+import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -12,7 +14,7 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "rankingJsfRequest")
 @RequestScoped
-public class RankingJsfRequest 
+public class RankingJsfRequest implements Serializable
 {
     // -------------------- ATRIBUTOS DE INSTÂNCIA -------------------- //
     @EJB
@@ -27,23 +29,14 @@ public class RankingJsfRequest
     {ranking = rankingEjbStateless.buscarRanking();}
 
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
-    public RankingEjbStateless getRankingEjbStateless() {
-        return rankingEjbStateless;
-    }
-
-    public void setRankingEjbStateless(RankingEjbStateless rankingEjbStateless) {
-        this.rankingEjbStateless = rankingEjbStateless;
-    }
-
-    public List<JogadorEntity> getRanking() {
-        return ranking;
-    }
-
-    public void setRanking(List<JogadorEntity> ranking) {
-        this.ranking = ranking;
-    }
-    
-    
+    public RankingEjbStateless getRankingEjbStateless() 
+    {return rankingEjbStateless;}
+    public void setRankingEjbStateless(RankingEjbStateless rankingEjbStateless) 
+    {this.rankingEjbStateless = rankingEjbStateless;}
+    public List<JogadorEntity> getRanking() 
+    {return ranking;}
+    public void setRanking(List<JogadorEntity> ranking) 
+    {this.ranking = ranking;}
     
     
 }

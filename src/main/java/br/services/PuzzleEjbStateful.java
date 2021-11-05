@@ -22,6 +22,7 @@ public class PuzzleEjbStateful
     {
         jogador = new JogadorEntity(cpf, nome);
         JogadorEntity.lista.add(jogador);
+        System.out.println(jogador);
     }
     
     public int gerarNumsAleatorios()
@@ -39,6 +40,7 @@ public class PuzzleEjbStateful
                 if(jog.getCpf().equals(cpf))
                     jog.setPontos(jog.getPontos() + 7);
             }
+            System.out.println(jogador);
             return "Acertou!";
         }
         return "Errou!";

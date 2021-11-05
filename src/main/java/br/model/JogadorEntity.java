@@ -38,6 +38,13 @@ public class JogadorEntity
     public void setPontos(int pontos) 
     {this.pontos = pontos;}
 
+    // -------------------- MÉTODOS SOBRESCRITOS -------------------- //
+
+    @Override
+    public String toString() {
+        return "JogadorEntity{" + "cpf=" + cpf + ", nome=" + nome + ", pontos=" + pontos + '}';
+    }
+    
     
     
 }
