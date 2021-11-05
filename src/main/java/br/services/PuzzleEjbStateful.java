@@ -21,7 +21,7 @@ public class PuzzleEjbStateful
     public void salvarJogador(String cpf, String nome)
     {
         jogador = new JogadorEntity(cpf, nome);
-        JogadorEntity.lista.add(jogador);
+        JogadorEntity.salvarNaLista(jogador);
         System.out.println(jogador);
     }
     
@@ -35,7 +35,7 @@ public class PuzzleEjbStateful
     {
         if(palpite == (valor1 + valor2))
         {
-            for(JogadorEntity jog : JogadorEntity.lista)
+            for(JogadorEntity jog : JogadorEntity.pegaLista())
             {
                 if(jog.getCpf().equals(cpf))
                     jog.setPontos(jog.getPontos() + 7);

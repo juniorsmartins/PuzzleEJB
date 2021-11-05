@@ -16,6 +16,7 @@ public class PuzzleJsfSession implements Serializable
     // -------------------- ATRIBUTOS DE INSTÂNCIA -------------------- //
     @EJB
     private PuzzleEjbStateful puzzleEjbStateful;
+    
     private String cpf;
     private String nome;
     private int pontos;

@@ -25,9 +25,9 @@
         <br/> Passo 1: faça a soma mental dos dois valores abaixo <br/>
         <h:form>
             <h:outputLabel value="Valor 1: "></h:outputLabel>
-            <h:outputText id="btn_nums1" value="#{puzzleJsfSession.valor1}"></h:outputText> <br/>
+            <h:outputText id="btn_nums1" value="${puzzleJsfSession.valor1}"></h:outputText> <br/>
             <h:outputLabel value="Valor 2: "></h:outputLabel>
-            <h:outputText id="btn_nums2" value="#{puzzleJsfSession.valor2}"></h:outputText> <br/>
+            <h:outputText id="btn_nums2" value="${puzzleJsfSession.valor2}"></h:outputText> <br/>
             <p:commandButton update="btn_nums1, btn_nums2" value="Gerar números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
         </h:form>
         <br/> Passo 2: o resultado da soma deve ser inserido no campo abaixo <br/>
@@ -37,27 +37,25 @@
             <br/> Passo 3: clique no botão abaixo para verificar se acertou <br/>
             <p:commandButton update="btn_palpite" value="Verificar Palpite" action="#{puzzleJsfSession.verificarPalpite()}"></p:commandButton> <br/> <br/>
             <h:outputLabel id="btn_palpite" value="Acertou ou Errou? "></h:outputLabel>
-            <h:outputText value="#{puzzleJsfSession.resposta}"></h:outputText>
+            <h:outputText value="${puzzleJsfSession.resposta}"></h:outputText>
         </h:form>
         <br/> Repita todos os passos para jogar novamente! <br/>
         <br/> Em caso de acerto, teus pontos aparecem no ranking. <br/>
 
         <br/> Ranking <br/>
-        <h:form>
-            <div class="card">
-                <p:dataTable var="jogador" value="#{rankingJsfRequest.ranking}">
-                    <p:column headerText="cpf">
-                        <h:outputText value="#{jogador.cpf}" />
-                    </p:column>
-                    <p:column headerText="nome">
-                        <h:outputText value="#{jogador.nome}" />
-                    </p:column>
-                    <p:column headerText="pontos">
-                        <h:outputText value="#{jogador.pontos}" />
-                    </p:column>
-                </p:dataTable>
-            </div>
-        </h:form>
+        <h:dataTable value="#{rankJsfRequest.ranking}" var="ranqueado">
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{ranqueado.nome}"></h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Pontos</f:facet>
+                <h:outputText value="#{ranqueado.pontos}"></h:outputText>
+            </h:column>
+        </h:dataTable>
+ 
+
+        
         
     </h:body>
 </f:view>
