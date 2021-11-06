@@ -4,7 +4,6 @@ import br.model.JogadorEntity;
 import br.services.RankingEjbStateless;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -28,8 +27,11 @@ public class RankingJsfRequest implements Serializable
     public RankingJsfRequest(){}
 
     // -------------------- MÉTODOS DE CONTROLE -------------------- //
-    public void buscarRanking()
-    {ranking = rankingEjbStateless.buscarRanking();}
+    public List<JogadorEntity> buscarRanking()
+    {
+        ranking = rankingEjbStateless.buscarRanking();
+        return ranking;
+    }
      
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
     public RankingEjbStateless getRankingEjbStateless() 
