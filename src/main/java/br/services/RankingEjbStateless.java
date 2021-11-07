@@ -15,7 +15,8 @@ public class RankingEjbStateless
     public List<JogadorEntity> buscarRanking()
     {return JogadorDatabase.pegarRanking();}
     
-    
+    public void gerarBaseDadosPraTeste(List<JogadorEntity> listaJogador)
+    {JogadorDatabase.gerarBaseDadosPraTeste(listaJogador);}
     
     
 }

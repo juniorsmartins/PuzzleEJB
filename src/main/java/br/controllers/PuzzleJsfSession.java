@@ -1,10 +1,13 @@
 package br.controllers;
 
+import br.model.JogadorEntity;
 import br.services.PuzzleEjbStateful;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 
 /**
  * @author JuniorMartins
@@ -38,6 +41,7 @@ public class PuzzleJsfSession implements Serializable
 
     public void gerarNumsAleatorios()
     {
+        resposta = "";
         valor1 = puzzleEjbStateful.gerarNumsAleatorios();
         valor2 = puzzleEjbStateful.gerarNumsAleatorios();
         soma = valor1 + valor2;
@@ -46,6 +50,16 @@ public class PuzzleJsfSession implements Serializable
     public void verificarPalpite()
     {
         resposta = puzzleEjbStateful.verificarPalpite(soma, palpite, cpf);
+        this.valor1 = 0;
+        this.valor2 = 0;
+        this.soma = 0;
+        this.palpite = 0;
+    }
+    
+    public String sairSessao()
+    {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index?faces-redirect=true";
     }
 
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
@@ -81,6 +95,9 @@ public class PuzzleJsfSession implements Serializable
     {return resposta;}
     public void setResposta(String resposta) 
     {this.resposta = resposta;}
+
+
+    
 
     
     

@@ -19,7 +19,6 @@ public class JogadorDatabase
     // -------------------- MÉTODOS ESTÁTICOS COMPLEMENTARES -------------------- //
     public static List<JogadorEntity> pegarRanking()
     {
-        preencherLista();
         Stream<Map.Entry<String, JogadorEntity>> transformarRank = rank.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.comparing(JogadorEntity::getPontos).reversed()))
                 .filter(j -> j.getValue().getPontos() > 0);
@@ -28,20 +27,10 @@ public class JogadorDatabase
         return listaJog;
     }
     
-    public static void preencherLista()
+    public static void gerarBaseDadosPraTeste(List<JogadorEntity> jogador)
     {
-        JogadorEntity j1 = new JogadorEntity("998877897", "Franz Kafka");
-        j1.setPontos(21);
-        JogadorEntity j2 = new JogadorEntity("333444885", "Von Misses");
-        j2.setPontos(7);
-        JogadorEntity j3 = new JogadorEntity("326877795", "Mariana Souza");
-        j3.setPontos(14);
-        JogadorEntity j4 = new JogadorEntity("111122233", "Fernando Moraes");
-        j3.setPontos(28);
-        rank.put(j1.getCpf(), j1);
-        rank.put(j2.getCpf(), j2);
-        rank.put(j3.getCpf(), j3);
-        rank.put(j4.getCpf(), j4);
+        for(JogadorEntity joga : jogador)
+            rank.putIfAbsent(joga.getCpf(), joga);
     }
 
     public static void salvarNoRanking(JogadorEntity jogador)
