@@ -13,6 +13,9 @@ import javax.ejb.EJB;
 @SessionScoped
 public class PuzzleJsfSession implements Serializable 
 {
+    // -------------------- ATRIBUTOS DE CLASSE -------------------- //
+    public static final long serialVersionUID = 1L;
+    
     // -------------------- ATRIBUTOS DE INSTÂNCIA -------------------- //
     @EJB
     private PuzzleEjbStateful puzzleEjbStateful;
@@ -31,7 +34,7 @@ public class PuzzleJsfSession implements Serializable
 
     // -------------------- MÉTODOS DE CONTROLE -------------------- //    
     public void salvarJogador()
-    {puzzleEjbStateful.salvarJogador(cpf, nome);}
+    {puzzleEjbStateful.salvarJogador(this.getCpf(), this.getNome());}
 
     public void gerarNumsAleatorios()
     {
@@ -42,7 +45,7 @@ public class PuzzleJsfSession implements Serializable
     
     public void verificarPalpite()
     {
-        resposta = puzzleEjbStateful.verificarPalpite(valor1, valor2, palpite, cpf);
+        resposta = puzzleEjbStateful.verificarPalpite(soma, palpite, cpf);
     }
 
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //

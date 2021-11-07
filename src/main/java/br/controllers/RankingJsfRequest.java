@@ -28,10 +28,7 @@ public class RankingJsfRequest implements Serializable
 
     // -------------------- MÉTODOS DE CONTROLE -------------------- //
     public List<JogadorEntity> buscarRanking()
-    {
-        ranking = rankingEjbStateless.buscarRanking();
-        return ranking;
-    }
+    {return rankingEjbStateless.buscarRanking();}
      
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
     public RankingEjbStateless getRankingEjbStateless() 

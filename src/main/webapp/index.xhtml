@@ -8,7 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-<f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">    
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">    
     <h:head>
         <title>Puzzle Ranking</title>
         <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
@@ -17,7 +17,7 @@
         <br/> Puzzle da UTFPR <br/>
 
         <div class="p-d-flex p-flex-column p-flex-md-row p-grid p-flex-md-wrap">
-            <div class="p-mb-2 p-mr-2 p-col-2 p-md-8 p-lg-6">
+            <div class="p-mb-2 p-mr-2 p-col-2 p-md-5 p-lg-3">
                 <h:form>
                     <div class="ui-fluid">
                         <br/> <h4>Passo 1 - Digite os dados pessoais</h4> 
@@ -29,12 +29,12 @@
                             <label for="fieldId2">CPF: </label>
                             <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.cpf}" pt:placeholder="número de documento"/>
                         </div>
-                        <p:commandButton value="Salvar Jogador" action="#{puzzleJsfSession.salvarJogador()}"></p:commandButton>
+                        <p:commandButton update="fieldId1, fieldId2" value="Salvar Jogador" action="#{puzzleJsfSession.salvarJogador()}"></p:commandButton>
                     </div>
                 </h:form>
             </div>
 
-            <div class="p-mb-2 p-mr-2 p-col-2">
+            <div class="p-mb-2 p-mr-2 p-col-2 p-md-5 p-lg-3">
                 <h:form>
                     <div class="ui-fluid">
                         <br/> <h4> Passo 2: Acerte a soma dos valores abaixo </h4> 
@@ -51,38 +51,41 @@
                 </h:form>
             </div>
 
-            <div class="p-mb-2 p-mr-2 p-col-2">
+            <div class="p-mb-2 p-mr-2 p-col-2 p-md-5 p-lg-3">
                 <h:form>
                     <div class="ui-fluid">
-                        <br/> <h4> Passo 3: vale sete pontos se acertar o palpite </h4> 
+                        <br/> <h4> Passo 3: Vale sete pontos se acertar o palpite </h4> 
                         <div class="p-field">
                             <h:outputLabel for="fieldId5" value="Palpite: "></h:outputLabel>
-                            <p:inputText id="fieldId5" styleClass="p-mb-2 p-d-block" value="#{puzzleJsfSession.palpite}" ></p:inputText> <br/>
+                            <p:inputText id="fieldId5" styleClass="p-mb-2 p-d-block" value="#{puzzleJsfSession.palpite}" ></p:inputText>
+                            <br/> <h4> Passo 4: clique para verificar se acertou </h4> 
+                            <h:outputLabel for="fieldId6" value="Acertou ou errou? "></h:outputLabel>
+                            <h:outputText id="fieldId6" value="${puzzleJsfSession.resposta}"></h:outputText> <br/> <br/>
+                            <p:commandButton update="fieldId5, fieldId6" value="Verificar Palpite" action="#{puzzleJsfSession.verificarPalpite()}"></p:commandButton>
                         </div>
                     </div>
                </h:form>
             </div>
             
-            <div class="p-mb-2 p-mr-2 p-col-2">
-                <h:form>
-                    <div class="ui-fluid">
-                        <br/> <h4> Passo 4: clique para verificar se acertou </h4> 
-                        <div class="p-field">
-                            <h:outputLabel for="fieldId6" value="Acertou ou errou? "></h:outputLabel>
-                            <h:outputText id="fieldId6" value="${puzzleJsfSession.resposta}"></h:outputText> <br/> <br/>
-                            <p:commandButton update="fieldId6" value="Verificar Palpite" action="#{puzzleJsfSession.verificarPalpite()}"></p:commandButton>
-                        </div>
-                    </div>
-               </h:form>
-            </div>
         </div>
         
-        <div class="p-d-flex p-flex-column p-flex-md-row p-grid">
-            <div class="p-mb-2 p-mr-2 p-col-2">   
+        <div class="p-d-flex p-flex-column p-flex-md-row p-grid p-flex-md-wrap">
+            <div class="p-mb-2 p-mr-2 p-col-2 p-md-5 p-lg-3">   
                 <br/> <h4> Ranking </h4>
-                <ui:repeat value="#{rankingJsfRequest.buscarRanking()}" var="item">
-                    <h:outputText value="#{item.nome} - #{item.pontos}"></h:outputText> <br/>
-                </ui:repeat> 
+                <h4> Passo 5: Clique para atualizar o ranking </h4>
+                <h:form>
+                    <div class="ui-fluid">
+                        <ui:repeat id="fieldId7" value="#{rankingJsfRequest.buscarRanking()}" var="item">
+                            <h:column>
+                                <h:outputText value="#{item.nome}"></h:outputText> 
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{item.pontos}"></h:outputText> <br/>
+                            </h:column>
+                        </ui:repeat> 
+                        <p:commandButton value="Buscar Ranking" actionListener="#{rankingJsfRequest.buscarRanking()}"></p:commandButton>
+                    </div>
+                </h:form>
             </div>
         </div>
         

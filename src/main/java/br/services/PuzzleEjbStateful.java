@@ -1,6 +1,8 @@
 package br.services;
 
+import br.model.JogadorDatabase;
 import br.model.JogadorEntity;
+import java.util.NavigableMap;
 import java.util.Random;
 import javax.ejb.Stateful;
 
@@ -21,8 +23,7 @@ public class PuzzleEjbStateful
     public void salvarJogador(String cpf, String nome)
     {
         jogador = new JogadorEntity(cpf, nome);
-        JogadorEntity.salvarNaLista(jogador);
-        System.out.println(jogador);
+        JogadorDatabase.salvarNoRanking(jogador);
     }
     
     public int gerarNumsAleatorios()
@@ -31,16 +32,11 @@ public class PuzzleEjbStateful
         return ran.nextInt(100);
     }
     
-    public String verificarPalpite(int valor1, int valor2, int palpite, String cpf)
+    public String verificarPalpite(int soma, int palpite, String cpf)
     {
-        if(palpite == (valor1 + valor2))
+        if(palpite == soma)
         {
-            for(JogadorEntity jog : JogadorEntity.pegaLista())
-            {
-                if(jog.getCpf().equals(cpf))
-                    jog.setPontos(jog.getPontos() + 7);
-            }
-            System.out.println(jogador);
+            JogadorDatabase.salvarPontos(cpf);
             return "Acertou!";
         }
         return "Errou!";
