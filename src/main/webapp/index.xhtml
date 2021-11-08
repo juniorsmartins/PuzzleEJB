@@ -12,6 +12,7 @@
     <h:head>
         <title>Puzzle UTFPR</title>
         <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
+        <h:outputStylesheet library="css" name="slyte.css" />
     </h:head>
         
     <h:body>
@@ -23,11 +24,11 @@
         <h:form id="jorForm1" style="margin-top:10px">
             <p:fieldset id="areaJogo1" legend="Área de Jogo" style="margin-top:10px" >
 
-                <p:panelGrid columns="3" layout="flex" columnClasses="p-col-12 p-md-3 p-xl-3, p-col-12 p-md-3 p-xl-3, p-col-12 p-md-3 p-xl-3" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+                <p:panelGrid columns="3" layout="flex" columnClasses="p-col-12 p-md-4 p-xl-4, p-col-12 p-md-4 p-xl-4, p-col-12 p-md-4 p-xl-4" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
                     
                     <p:column>
                         <p:row>
-                            <h4>Cadastro de Jogador</h4>
+                            <h4>Cadastrar Jogador</h4>
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId1" value="CPF: " />
@@ -41,24 +42,24 @@
                     
                     <p:column>
                         <p:row>
-                            <h4>Valores para soma</h4>
+                            <h4>Valores para somar</h4>
                         </p:row>
                         <p:row>
-                            <p:outputLabel for="fieldId3" value="Valor 1: " />
-                            <h:outputText id="fieldId3" value="#{puzzleJsfSession.valor1}" />
+                            <p:outputLabel for="fieldId3" value="Valor 1: " /> 
+                            <p:outputLabel id="fieldId3" value="#{puzzleJsfSession.valor1}" /> <br/>
                         </p:row>
                         <p:row>
-                            <p:outputLabel for="fieldId4" value="Valor 2: " />
-                            <h:outputText id="fieldId4" value="#{puzzleJsfSession.valor2}" />
+                            <p:outputLabel for="fieldId4" value="Valor 2: " /> 
+                            <p:outputLabel id="fieldId4" value="#{puzzleJsfSession.valor2}" /> <br/>
                         </p:row>
                         <p:row>
-                            <p:commandButton update="fieldId3, fieldId4" value="Novos números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
+                            <br/> <p:commandButton update="fieldId3 fieldId4 fieldId6" value="Novos números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
                         </p:row>
                     </p:column>
                     
                     <p:column>
                         <p:row>
-                            <h4>Confirmação de palpite</h4>
+                            <h4>Confirmar palpite</h4>
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId5" value="Palpite: " />
@@ -66,10 +67,10 @@
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId6" value="Resultado: " />
-                            <h:outputText id="fieldId6" value="#{puzzleJsfSession.resposta}" pt:placeholder="acertou ou errou?" />
+                            <p:outputLabel id="fieldId6" value="#{puzzleJsfSession.resposta}" pt:placeholder="acertou ou errou?" />
                         </p:row>
                         <p:row>
-                            <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}"></p:commandButton>    
+                            <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6 jorForm2" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}"></p:commandButton>    
                         </p:row>
                     </p:column>
                     
@@ -82,9 +83,6 @@
         <h:form id="jorForm2" style="margin-top:10px">
             <p:fieldset id="rankingJogadoresPontos" legend="Ranking de Jogadores">
                 <p:dataTable id="rankingJogadores" var="jogador" value="#{rankingJsfRequest.listaRanqueados}" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
-                    <f:facet name="header">
-                        <p:commandButton id="submitButton" value="Atualizar" update="rankingJogadores" />
-                    </f:facet>
                     <p:column style="width:20px">
                         <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
                         <p:draggable for="dragIcon" revert="true" helper="clone"/>

@@ -38,7 +38,7 @@ public class PuzzleJsfSession implements Serializable
     // -------------------- MÉTODOS DE CONTROLE -------------------- //    
     public void gerarNumsAleatorios()
     {
-        resposta = "";
+        resposta = " ";
         valor1 = puzzleEjbStateful.gerarNumsAleatorios();
         valor2 = puzzleEjbStateful.gerarNumsAleatorios();
         soma = valor1 + valor2;

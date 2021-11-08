@@ -23,8 +23,12 @@ public class PuzzleEjbStateful
     public void salvarJogador(String cpf, String nome)
     {
         jogador = new JogadorEntity(cpf, nome);
+        limpar();
         JogadorDatabase.salvarNoRanking(jogador);
     }
+    
+    public void limpar()
+    {}
     
     public int gerarNumsAleatorios()
     {
