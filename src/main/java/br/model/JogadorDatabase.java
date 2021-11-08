@@ -51,7 +51,7 @@ public class JogadorDatabase
         if(rank.containsKey(cpf))
         {
             JogadorEntity j = rank.remove(cpf);
-            j.setPontos(j.getPontos() + 7);
+            j.setPontos(j.getPontos() + 1);
             rank.put(cpf, j);
         }
     }

@@ -15,7 +15,8 @@
     </h:head>
         
     <h:body>
-
+        
+        <p:fieldset id="areaJogo" legend="Área de Jogo">
         <div class="card">
             <h:form>
                 <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
@@ -27,24 +28,24 @@
         <div class="p-d-flex p-flex-column p-flex-md-row p-grid p-flex-md-wrap">
             
              
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-2">
+            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
                 <h:form>
                     <div class="ui-fluid">
                         <br/> <h4>Passo 1 - Digite os dados pessoais</h4> 
                         <div class="p-field">
                             <label for="fieldId1">Nome: </label>
-                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.nome}" pt:placeholder="nome e sobrenome"/>
+                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.nome}" pt:placeholder="nome e sobrenome" />
                         </div>
                         <div class="p-field">
                             <label for="fieldId2">CPF: </label>
                             <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.cpf}" pt:placeholder="número de documento"/>
                         </div>
-                        <p:commandButton update="fieldId1, fieldId2" value="Salvar Jogador" action="#{puzzleJsfSession.salvarJogador()}"></p:commandButton>
+                        <p:commandButton update="fieldId1 fieldId2" value="Salvar Jogador" action="#{puzzleJsfSession.salvarJogador()}"></p:commandButton>
                     </div>
                 </h:form>
             </div>
 
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-2">
+            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
                 <h:form>
                     <div class="ui-fluid">
                         <br/> <h4> Passo 2: Acerte a soma dos valores abaixo </h4> 
@@ -61,7 +62,7 @@
                 </h:form>
             </div>
 
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-2">
+            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
                 <h:form>
                     <div class="ui-fluid">
                         <br/> <h4> Passo 3: Vale sete pontos se acertar o palpite </h4> 
@@ -77,15 +78,18 @@
                </h:form>
             </div>
         </div>
+        </p:fieldset>
+        
+
         
         
 
-        
-        
-
-        <h:form id="carForm">
+        <h:form id="carForm" style="margin-top:10px">
             <p:fieldset id="rankingJogadoresPontos" legend="Ranking de Jogadores">
-                <p:dataTable id="rankingJogadores" var="jogador" value="#{rankingJsfRequest.listaRanqueados}">
+                <p:dataTable id="rankingJogadores" var="jogador" value="#{rankingJsfRequest.listaRanqueados}" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
+                    <f:facet name="header">
+                        <p:commandButton id="submitButton" value="Atualizar" update="rankingJogadores" />
+                    </f:facet>
                     <p:column style="width:20px">
                         <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
                         <p:draggable for="dragIcon" revert="true" helper="clone"/>
@@ -105,7 +109,6 @@
                 </p:dataTable>
             </p:fieldset>
         </h:form>
-       
 
 
 
