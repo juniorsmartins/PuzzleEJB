@@ -36,9 +36,6 @@ public class PuzzleJsfSession implements Serializable
     public PuzzleJsfSession(){}
 
     // -------------------- MÉTODOS DE CONTROLE -------------------- //    
-    public void salvarJogador()
-    {puzzleEjbStateful.salvarJogador(this.getCpf(), this.getNome());}
-
     public void gerarNumsAleatorios()
     {
         resposta = "";
@@ -47,8 +44,9 @@ public class PuzzleJsfSession implements Serializable
         soma = valor1 + valor2;
     }
     
-    public void verificarPalpite()
+    public void salvarJogadorAndVerificarPalpite()
     {
+        puzzleEjbStateful.salvarJogador(this.getCpf(), this.getNome());
         resposta = puzzleEjbStateful.verificarPalpite(soma, palpite, cpf);
         this.valor1 = 0;
         this.valor2 = 0;

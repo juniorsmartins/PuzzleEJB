@@ -15,76 +15,71 @@
     </h:head>
         
     <h:body>
-        
-        <p:fieldset id="areaJogo" legend="Área de Jogo">
+
         <div class="card">
-            <h:form>
-                <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
-                <!-- comment  <p:commandButton value="Options" icon="pi pi-cog" action="" styleClass="ui-button-outlined"/> -->
-            </h:form>
+            <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
         </div>
-
-
-        <div class="p-d-flex p-flex-column p-flex-md-row p-grid p-flex-md-wrap">
-            
-             
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
-                <h:form>
-                    <div class="ui-fluid">
-                        <br/> <h4>Passo 1 - Digite os dados pessoais</h4> 
-                        <div class="p-field">
-                            <label for="fieldId1">Nome: </label>
-                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.nome}" pt:placeholder="nome e sobrenome" />
-                        </div>
-                        <div class="p-field">
-                            <label for="fieldId2">CPF: </label>
-                            <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.cpf}" pt:placeholder="número de documento"/>
-                        </div>
-                        <p:commandButton update="fieldId1 fieldId2" value="Salvar Jogador" action="#{puzzleJsfSession.salvarJogador()}"></p:commandButton>
-                    </div>
-                </h:form>
-            </div>
-
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
-                <h:form>
-                    <div class="ui-fluid">
-                        <br/> <h4> Passo 2: Acerte a soma dos valores abaixo </h4> 
-                        <div class="p-field">
-                            <label for="fieldId3">Valor 1: </label>
-                            <h:outputText id="fieldId3" value="${puzzleJsfSession.valor1}" />
-                        </div>
-                        <div class="p-field">
-                            <label for="fieldId4">Valor 2: </label>
-                            <h:outputText id="fieldId4" value="${puzzleJsfSession.valor2}" />
-                        </div>
-                        <p:commandButton update="fieldId3, fieldId4" value="Gerar números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
-                    </div>
-                </h:form>
-            </div>
-
-            <div class="p-mb-10 p-mr-4 p-col-10 p-sm-8 p-md-6 p-lg-4 p-xl-3">
-                <h:form>
-                    <div class="ui-fluid">
-                        <br/> <h4> Passo 3: Vale sete pontos se acertar o palpite </h4> 
-                        <div class="p-field">
-                            <h:outputLabel for="fieldId5" value="Palpite: "></h:outputLabel>
-                            <p:inputText id="fieldId5" styleClass="p-mb-2 p-d-block" value="#{puzzleJsfSession.palpite}" ></p:inputText>
-                            <h4> Passo 4: clique para verificar se acertou </h4> 
-                            <h:outputLabel for="fieldId6" value="Acertou ou errou? "></h:outputLabel>
-                            <h:outputText id="fieldId6" value="${puzzleJsfSession.resposta}"></h:outputText> <br/> <br/>
-                            <p:commandButton update="fieldId5, fieldId6" value="Verificar Palpite" action="#{puzzleJsfSession.verificarPalpite()}"></p:commandButton>
-                        </div>
-                    </div>
-               </h:form>
-            </div>
-        </div>
-        </p:fieldset>
         
+        <h:form id="jorForm1" style="margin-top:10px">
+            <p:fieldset id="areaJogo1" legend="Área de Jogo" style="margin-top:10px" >
 
-        
-        
+                <p:panelGrid columns="3" layout="flex" columnClasses="p-col-12 p-md-3 p-xl-3, p-col-12 p-md-3 p-xl-3, p-col-12 p-md-3 p-xl-3" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+                    
+                    <p:column>
+                        <p:row>
+                            <h4>Cadastro de Jogador</h4>
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId1" value="CPF: " />
+                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.cpf}" pt:placeholder="999.999.999-99" />
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId2" value="Nome: " />
+                            <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.nome}" pt:placeholder="nome completo" />
+                        </p:row>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:row>
+                            <h4>Valores para soma</h4>
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId3" value="Valor 1: " />
+                            <h:outputText id="fieldId3" value="#{puzzleJsfSession.valor1}" />
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId4" value="Valor 2: " />
+                            <h:outputText id="fieldId4" value="#{puzzleJsfSession.valor2}" />
+                        </p:row>
+                        <p:row>
+                            <p:commandButton update="fieldId3, fieldId4" value="Novos números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
+                        </p:row>
+                    </p:column>
+                    
+                    <p:column>
+                        <p:row>
+                            <h4>Confirmação de palpite</h4>
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId5" value="Palpite: " />
+                            <p:inputText id="fieldId5" type="text" value="#{puzzleJsfSession.palpite}" />
+                        </p:row>
+                        <p:row>
+                            <p:outputLabel for="fieldId6" value="Resultado: " />
+                            <h:outputText id="fieldId6" value="#{puzzleJsfSession.resposta}" pt:placeholder="acertou ou errou?" />
+                        </p:row>
+                        <p:row>
+                            <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}"></p:commandButton>    
+                        </p:row>
+                    </p:column>
+                    
+                </p:panelGrid>
 
-        <h:form id="carForm" style="margin-top:10px">
+            </p:fieldset>
+        </h:form>
+
+
+        <h:form id="jorForm2" style="margin-top:10px">
             <p:fieldset id="rankingJogadoresPontos" legend="Ranking de Jogadores">
                 <p:dataTable id="rankingJogadores" var="jogador" value="#{rankingJsfRequest.listaRanqueados}" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
                     <f:facet name="header">
