@@ -47,7 +47,6 @@ public class MensagemJsfProdutor
     public void sendRanking()
     {
         List<JogadorEntity> rankeados = JogadorDatabase.pegarRanking();
-        rankeados.sort(Comparator.comparing(JogadorEntity::getPontos).reversed());
 
         for(JogadorEntity jogador : rankeados)
         {

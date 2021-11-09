@@ -15,15 +15,19 @@ public class JogadorDatabase
 {
     // -------------------- ATRIBUTOS DE CLASSE -------------------- //
     public static NavigableMap<String, JogadorEntity> rank = new TreeMap<>();
+
+    // -------------------- ATRIBUTOS DE INSTÂNCIA -------------------- //
+    public static boolean eleAcertou;
     
     // -------------------- MÉTODOS ESTÁTICOS COMPLEMENTARES -------------------- //
     public static List<JogadorEntity> pegarRanking()
     {
         Stream<Map.Entry<String, JogadorEntity>> transformarRank = rank.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.comparing(JogadorEntity::getPontos).reversed()))
-                .filter(j -> j.getValue().getPontos() > -1);
+                .sorted(Map.Entry.comparingByValue(Comparator.comparing(JogadorEntity::getPontos).reversed()));
+
         List<JogadorEntity> listaJog = new ArrayList<>();
         transformarRank.forEach(j -> listaJog.add(j.getValue()));
+
         return listaJog;
     }
     
@@ -34,7 +38,7 @@ public class JogadorDatabase
     }
 
     public static void salvarNoRanking(JogadorEntity jogador)
-    {
+    {       
         if(rank.containsKey(jogador.getCpf()))
         {
             JogadorEntity jog = new JogadorEntity();

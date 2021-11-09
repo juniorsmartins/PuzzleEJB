@@ -54,7 +54,6 @@ public class RankingJsfRequest implements Serializable
     {return rankingEjbStateless.buscarRanking();}
     
     // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
-
     public RankingEjbStateless getRankingEjbStateless() 
     {return rankingEjbStateless;}
     public void setRankingEjbStateless(RankingEjbStateless rankingEjbStateless) 
