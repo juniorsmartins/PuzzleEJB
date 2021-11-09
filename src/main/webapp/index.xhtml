@@ -19,7 +19,7 @@
 
         <h:form id="controlForm">       
             <p:fieldset id="areaControle" legend="Área de Controle" style="margin-top:10px" >
-                <p:panelGrid columns="2" layout="flex" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+                <p:panelGrid columns="2" layout="grid" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
                     <p:column>
                         <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
                     </p:column>
@@ -42,11 +42,11 @@
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId1" value="CPF: " />
-                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.cpf}" pt:placeholder="999.999.999-99" />
+                            <p:inputText id="fieldId1" type="text" value="#{puzzleJsfSession.jogadore.cpf}" pt:placeholder="999.999.999-99" />
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId2" value="Nome: " />
-                            <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.nome}" pt:placeholder="nome completo" />
+                            <p:inputText id="fieldId2" type="text" value="#{puzzleJsfSession.jogadore.nome}" pt:placeholder="nome completo" />
                         </p:row>
                     </p:column>
                     
@@ -56,11 +56,11 @@
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId3" value="Valor 1: " /> 
-                            <p:outputLabel id="fieldId3" value="#{puzzleJsfSession.valor1}" /> <br/>
+                            <p:outputLabel id="fieldId3" value="#{puzzleJsfSession.puzzleEjbStateful.valor1}" /> <br/>
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId4" value="Valor 2: " /> 
-                            <p:outputLabel id="fieldId4" value="#{puzzleJsfSession.valor2}" /> <br/>
+                            <p:outputLabel id="fieldId4" value="#{puzzleJsfSession.puzzleEjbStateful.valor2}" /> <br/>
                         </p:row>
                         <p:row>
                             <br/> <p:commandButton update="fieldId3 fieldId4 fieldId6" value="Novos números" action="#{puzzleJsfSession.gerarNumsAleatorios()}"></p:commandButton>
@@ -73,11 +73,11 @@
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId5" value="Palpite: " />
-                            <p:inputText id="fieldId5" type="text" value="#{puzzleJsfSession.palpite}" />
+                            <p:inputText id="fieldId5" type="text" value="#{puzzleJsfSession.puzzleEjbStateful.palpite}" />
                         </p:row>
                         <p:row>
                             <p:outputLabel for="fieldId6" value="Resultado: " />
-                            <p:outputLabel id="fieldId6" value="#{puzzleJsfSession.resposta}" pt:placeholder="acertou ou errou?" />
+                            <p:outputLabel id="fieldId6" value="#{puzzleJsfSession.puzzleEjbStateful.resposta}" pt:placeholder="acertou ou errou?" />
                         </p:row>
                         <p:row>
                             <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6 jorForm2" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}">
