@@ -17,10 +17,20 @@
         
     <h:body>
 
-        <div class="card">
-            <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
-        </div>
-        
+        <h:form id="controlForm">       
+            <p:fieldset id="areaControle" legend="Área de Controle" style="margin-top:10px" >
+                <p:panelGrid columns="2" layout="flex" styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+                    <p:column>
+                        <p:commandButton value="Iniciar Game!" icon="pi pi-home" action="#{puzzleJsfSession.sairSessao()}" styleClass="p-mr-2" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton update="idMessage" value="Enviar" id="idEnviar" action="#{mensagemJsfProdutor.send()}"></p:commandButton>
+                        <p:inputText id="idMessage" type="text" value="#{mensagemJsfProdutor.mensagem}" placeholder="mensagem para o suporte técnico" ></p:inputText>
+                    </p:column>
+                </p:panelGrid>
+            </p:fieldset>
+        </h:form>
+
         <h:form id="jorForm1" style="margin-top:10px">
             <p:fieldset id="areaJogo1" legend="Área de Jogo" style="margin-top:10px" >
 
