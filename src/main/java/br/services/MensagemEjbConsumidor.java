@@ -1,5 +1,7 @@
 package br.services;
 
+import br.model.JogadorEntity;
+import java.util.NavigableMap;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.Message;
@@ -15,7 +17,6 @@ public class MensagemEjbConsumidor implements MessageListener
     @Override
     public void onMessage(Message msg) 
     {
-        System.out.println("Mensagem recebida!");
         try
         {
             TextMessage tm = (TextMessage) msg;
@@ -27,6 +28,7 @@ public class MensagemEjbConsumidor implements MessageListener
             System.err.println(e.getMessage());
         }
     }
+
     
 }
 

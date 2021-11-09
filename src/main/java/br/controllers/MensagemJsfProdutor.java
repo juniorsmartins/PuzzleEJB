@@ -1,5 +1,8 @@
 package br.controllers;
 
+import br.model.JogadorDatabase;
+import br.model.JogadorEntity;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +22,7 @@ public class MensagemJsfProdutor
     private ConnectionFactory connectionFactory;
     
     @Resource(lookup = "utfpr/tarefaejb")
-    private Queue fila;
+    private Queue tarefaejb;
     
     private String mensagem;
 
@@ -29,13 +32,31 @@ public class MensagemJsfProdutor
     {
         try{
             JMSContext context = connectionFactory.createContext();
-            context.createProducer().send(fila, mensagem);
+            context.createProducer().send(tarefaejb, mensagem);
         }catch(Exception e)
         {
             System.err.println("Erro!");
             System.err.println(e.getMessage());
         }
         mensagem = " ";
+    }
+    
+    public void sendRanking()
+    {
+        List<JogadorEntity> rankeados = JogadorDatabase.pegarRanking();
+
+        for(JogadorEntity jogador : rankeados)
+        {
+            String jogadores = "" + jogador.getNome() + " - " + jogador.getPontos();
+            try{
+                JMSContext context = connectionFactory.createContext();
+                context.createProducer().send(tarefaejb, jogadores);
+            }catch(Exception e)
+            {
+                System.err.println("Erro!");
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     public String getMensagem() 

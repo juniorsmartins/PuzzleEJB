@@ -80,7 +80,9 @@
                             <p:outputLabel id="fieldId6" value="#{puzzleJsfSession.resposta}" pt:placeholder="acertou ou errou?" />
                         </p:row>
                         <p:row>
-                            <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6 jorForm2" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}"></p:commandButton>    
+                            <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6 jorForm2" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}">
+                                <f:ajax event="click" listener="#{mensagemJsfProdutor.sendRanking()}"></f:ajax>
+                            </p:commandButton>
                         </p:row>
                     </p:column>
                     
@@ -92,7 +94,7 @@
 
         <h:form id="jorForm2" style="margin-top:10px">
             <p:fieldset id="rankingJogadoresPontos" legend="Ranking de Jogadores">
-                <p:dataTable id="rankingJogadores" var="jogador" value="#{rankingJsfRequest.listaRanqueados}" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
+                <p:dataTable id="rankingJogadores" value="#{rankingJsfRequest.listaRanqueados}" var="jogador" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
                     <p:column style="width:20px">
                         <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
                         <p:draggable for="dragIcon" revert="true" helper="clone"/>
