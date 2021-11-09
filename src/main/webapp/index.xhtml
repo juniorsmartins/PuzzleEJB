@@ -81,7 +81,7 @@
                         </p:row>
                         <p:row>
                             <p:commandButton update="fieldId1 fieldId2 fieldId5 fieldId6 jorForm2" value="Verificar palpite" action="#{puzzleJsfSession.salvarJogadorAndVerificarPalpite()}">
-                                <f:ajax event="click" listener="#{mensagemJsfProdutor.sendRanking()}"></f:ajax>
+                                <f:ajax event="click" listener="#{mensagemJsfProdutor.sendRanking()}" render="fieldId3 fieldId4"></f:ajax>
                             </p:commandButton>
                         </p:row>
                     </p:column>
@@ -94,22 +94,22 @@
 
         <h:form id="jorForm2" style="margin-top:10px">
             <p:fieldset id="rankingJogadoresPontos" legend="Ranking de Jogadores">
-                <p:dataTable id="rankingJogadores" value="#{rankingJsfRequest.listaRanqueados}" var="jogador" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
+                <p:dataTable id="rankingJogadores" value="#{rankingJsfRequest.buscarRanking()}" var="jogador" paginator="true" rows="10" paginatorPosition="bottom" clientCache="true">
                     <p:column style="width:20px">
                         <h:outputText id="dragIcon" styleClass="ui-icon pi pi-plus" />
                         <p:draggable for="dragIcon" revert="true" helper="clone"/>
                     </p:column>
 
                     <p:column headerText="CPF">
-                        <h:outputText value="#{jogador.cpf}" />
+                        <h:outputText id="rankingCpf" value="#{jogador.cpf}" />
                     </p:column>
 
                     <p:column headerText="Nome">
-                        <h:outputText value="#{jogador.nome}" />
+                        <h:outputText id="rankingNome" value="#{jogador.nome}" />
                     </p:column>
 
                     <p:column headerText="Pontos">
-                        <h:outputText value="#{jogador.pontos}" />
+                        <h:outputText id="rankingPontos" value="#{jogador.pontos}" />
                     </p:column>
                 </p:dataTable>
             </p:fieldset>

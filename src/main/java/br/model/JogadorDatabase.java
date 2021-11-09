@@ -21,7 +21,7 @@ public class JogadorDatabase
     {
         Stream<Map.Entry<String, JogadorEntity>> transformarRank = rank.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.comparing(JogadorEntity::getPontos).reversed()))
-                .filter(j -> j.getValue().getPontos() > 0);
+                .filter(j -> j.getValue().getPontos() > -1);
         List<JogadorEntity> listaJog = new ArrayList<>();
         transformarRank.forEach(j -> listaJog.add(j.getValue()));
         return listaJog;

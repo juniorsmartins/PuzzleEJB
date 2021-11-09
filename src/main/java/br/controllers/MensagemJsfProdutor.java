@@ -2,6 +2,7 @@ package br.controllers;
 
 import br.model.JogadorDatabase;
 import br.model.JogadorEntity;
+import java.util.Comparator;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.inject.Named;
@@ -17,7 +18,7 @@ import javax.jms.ConnectionFactory;
 @RequestScoped
 public class MensagemJsfProdutor 
 {
-
+    // -------------------- ATRIBUTOS DE INSTÂNCIA -------------------- //
     @Resource(lookup = "java:comp/DefaultJMSConnectionFactory")
     private ConnectionFactory connectionFactory;
     
@@ -26,8 +27,10 @@ public class MensagemJsfProdutor
     
     private String mensagem;
 
+    // -------------------- CONSTRUTORES -------------------- //
     public MensagemJsfProdutor(){}
 
+    // -------------------- MÉTODOS CONTROLADORES -------------------- //
     public void send()
     {
         try{
@@ -44,6 +47,7 @@ public class MensagemJsfProdutor
     public void sendRanking()
     {
         List<JogadorEntity> rankeados = JogadorDatabase.pegarRanking();
+        rankeados.sort(Comparator.comparing(JogadorEntity::getPontos).reversed());
 
         for(JogadorEntity jogador : rankeados)
         {
@@ -59,10 +63,12 @@ public class MensagemJsfProdutor
         }
     }
 
+    // -------------------- MÉTODOS DE ACESSO E MODIFICAÇÃO -------------------- //
     public String getMensagem() 
     {return mensagem;}
     public void setMensagem(String mensagem) 
     {this.mensagem = mensagem;}
+
 
    
     

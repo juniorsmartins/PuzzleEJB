@@ -1,11 +1,9 @@
 package br.controllers;
 
-import br.model.JogadorEntity;
 import br.services.PuzzleEjbStateful;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 
@@ -93,11 +91,6 @@ public class PuzzleJsfSession implements Serializable
     {return resposta;}
     public void setResposta(String resposta) 
     {this.resposta = resposta;}
-
-
-    
-
-    
     
     
     

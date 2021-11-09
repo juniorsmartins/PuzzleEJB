@@ -2,7 +2,6 @@ package br.services;
 
 import br.model.JogadorDatabase;
 import br.model.JogadorEntity;
-import java.util.NavigableMap;
 import java.util.Random;
 import javax.ejb.Stateful;
 

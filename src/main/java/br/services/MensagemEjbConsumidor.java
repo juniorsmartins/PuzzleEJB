@@ -1,7 +1,5 @@
 package br.services;
 
-import br.model.JogadorEntity;
-import java.util.NavigableMap;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.Message;
